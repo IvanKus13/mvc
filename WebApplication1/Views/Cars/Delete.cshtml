@@ -1,0 +1,13 @@
+﻿@model WebApplication1.Models.Car
+
+<h2>Видалити автомобіль</h2>
+
+<p>Ви впевнені, що хочете видалити:  
+<b>@Model.Brand @Model.Model (@Model.Year)</b>?</p>
+
+<form asp-action="Delete">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit">Так, видалити</button>
+</form>
+
+<a asp-action="Index">Назад</a>

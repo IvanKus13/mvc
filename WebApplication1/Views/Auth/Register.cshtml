@@ -1,0 +1,23 @@
+﻿@model WebApplication1.Models.User
+@{
+    ViewData["Title"] = "Register";
+}
+<h2>Register</h2>
+
+<form method="post">
+    <div>
+        <label>Login</label>
+        <input asp-for="Login" />
+    </div>
+    <div>
+        <label>Password</label>
+        <input asp-for="Password" type="password" />
+    </div>
+    <button type="submit">Sign up</button>
+</form>
+
+@if (ViewBag.Error != null)
+{
+    <p style="color:red">@ViewBag.Error</p>
+}
+<p><a asp-controller="Auth" asp-action="Login">Already have an account? Login</a></p>

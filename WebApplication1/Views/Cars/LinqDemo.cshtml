@@ -1,0 +1,130 @@
+﻿@model WebApplication1.Models.LinqDemoViewModel
+
+@{
+    ViewData["Title"] = "LINQ демонстрація";
+}
+
+<h1>LINQ демонстрація</h1>
+
+<hr />
+
+<h2>1.Where()</h2>
+
+<p>Автомобілі з роком випуску від 2020:</p>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Марка</th>
+            <th>Модель</th>
+            <th>Рік</th>
+            <th>Ціна</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var car in Model.FilteredCars)
+        {
+            <tr>
+                <td>@car.Brand</td>
+                <td>@car.Model</td>
+                <td>@car.Year</td>
+                <td>@car.Price</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<hr />
+
+<h2>2.OrderByDescending()</h2>
+
+<p>Автомобілі відсортовані за ціною від більшої до меншої:</p>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Марка</th>
+            <th>Модель</th>
+            <th>Рік</th>
+            <th>Ціна</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var car in Model.SortedCars)
+        {
+            <tr>
+                <td>@car.Brand</td>
+                <td>@car.Model</td>
+                <td>@car.Year</td>
+                <td>@car.Price</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<hr />
+
+<h2>3.Select()</h2>
+
+<p>Отримання тільки необхідних полів автомобіля:</p>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Марка</th>
+            <th>Модель</th>
+            <th>Рік</th>
+            <th>Ціна</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var car in Model.ProjectedCars)
+        {
+            <tr>
+                <td>@car.Brand</td>
+                <td>@car.Model</td>
+                <td>@car.Year</td>
+                <td>@car.Price</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<hr />
+
+<h2>4.Include()</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Замовлення</th>
+            <th>Автомобіль</th>
+            <th>Користувач</th>
+            <th>Дата</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var order in Model.Orders)
+        {
+            <tr>
+                <td>@order.Id</td>
+                <td>
+                    @order.Car?.Brand @order.Car?.Model
+                </td>
+                <td>
+                    @order.User?.Login
+                </td>
+                <td>@order.OrderDate</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<hr />
+
+<h2>5.CountAsync()</h2>
+
+<p>
+    Загальна кількість автомобілів:
+    <strong>@Model.CarsCount</strong>
+</p>

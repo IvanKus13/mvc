@@ -1,0 +1,72 @@
+﻿@model IEnumerable<WebApplication1.Models.Order>
+
+<h2>Ваші замовлення</h2>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Марка</th>
+            <th>Модель</th>
+            <th>Рік</th>
+             <th>Ціна</th>  
+            <th>Дата замовлення</th>
+            <th>Дії</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var order in Model)
+        {
+            <tr>
+                <td>@order.Car.Brand</td>
+                <td>@order.Car.Model</td>
+                <td>@order.Car.Year</td>
+                <td>@order.Car.Price$</td>  
+                <td>@order.OrderDate.ToString("dd.MM.yyyy HH:mm")</td>
+
+                <td>
+                    <!-- Деталі авто -->
+                    <a asp-controller="Cars"
+                       asp-action="Details"
+                       asp-route-id="@order.CarId"
+                       class="btn btn-info btn-sm">
+                        Деталі
+                    </a>
+
+                    <!-- Оформити доставку -->
+                    <a asp-controller="Orders"
+                    asp-action="Delivery"
+                    asp-route-orderId="@order.Id"
+                    class="btn btn-warning btn-sm">
+                     Оформити доставку
+                     </a>
+
+                    <!-- Редагувати замовлення -->
+                    <a asp-action="Edit"
+                       asp-route-id="@order.Id"
+                       class="btn btn-primary btn-sm">
+                        Редагувати
+                    </a>
+
+                    <!-- Видалити -->
+                    <a asp-action="Delete"
+                       asp-route-id="@order.Id"
+                       class="btn btn-danger btn-sm">
+                        Видалити
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

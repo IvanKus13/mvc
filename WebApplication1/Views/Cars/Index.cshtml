@@ -1,0 +1,73 @@
+﻿@model IEnumerable<WebApplication1.Models.Car>
+
+@{
+    var role = Context.Session.GetString("UserRole");
+}
+
+<img src="/images/CarShop.png" 
+     style="width:100%; border-radius:5px; margin-bottom:20px;" />
+
+<h1>Список автомобілів</h1>
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Марка</th>
+            <th>Модель</th>
+            <th>Рік</th>
+            <th>Ціна</th>
+            <th>Опис</th>
+            <th>Дії</th> 
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var car in Model)
+    {
+        <tr>
+            <td>@car.Id</td>
+            <td>@car.Brand</td>
+            <td>@car.Model</td>
+            <td>@car.Year</td>
+            <td>@car.Price $</td>
+            <td>@car.Description</td>
+
+            <td>
+                <a asp-action="Details" asp-route-id="@car.Id"
+                   class="btn btn-info btn-sm">Переглянути</a>
+
+                <a asp-controller="Orders" asp-action="Buy" asp-route-carId="@car.Id"
+                   class="btn btn-success btn-sm">Придбати</a>
+
+                @if (role == "Admin")
+                {
+                    <a asp-controller="Cars" asp-action="Edit" asp-route-id="@car.Id"
+                       class="btn btn-warning btn-sm">Редагувати</a>
+
+                    <a asp-controller="Cars" asp-action="Delete" asp-route-id="@car.Id"
+                       class="btn btn-danger btn-sm">Видалити</a>
+                }
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+@if (role == "Admin")
+{
+    <a asp-action="Create" class="btn btn-primary">Додати автомобіль</a>
+}

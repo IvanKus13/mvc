@@ -1,0 +1,44 @@
+﻿@model WebApplication1.Models.DeliveryInfo
+
+<h2>Оформлення доставки</h2>
+
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+<form asp-action="Delivery" asp-controller="Orders" method="post" novalidate>
+
+    <input type="hidden" asp-for="OrderId" />
+
+    <div class="form-group">
+        <label>ПІБ</label>
+        <input asp-for="FullName" class="form-control" />
+        <span asp-validation-for="FullName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mt-2">
+        <label>Телефон</label>
+        <input asp-for="Phone" class="form-control" />
+        <span asp-validation-for="Phone" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mt-2">
+        <label>Місто</label>
+        <input asp-for="City" class="form-control" />
+        <span asp-validation-for="City" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mt-2">
+        <label>Поштовий індекс</label>
+        <input asp-for="PostalCode" class="form-control" />
+        <span asp-validation-for="PostalCode" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mt-2">
+        <label>Додаткова інформація</label>
+        <textarea asp-for="AdditionalInfo" class="form-control"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3">
+        Оформити доставку
+    </button>
+
+</form>

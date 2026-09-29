@@ -1,0 +1,18 @@
+﻿@model WebApplication1.Models.Order
+
+<h2>Підтвердження видалення</h2>
+
+<p>Ви впевнені, що хочете видалити це замовлення?</p>
+
+<ul>
+    <li><strong>Авто:</strong> @Model.Car.Brand @Model.Car.Model</li>
+    <li><strong>Рік:</strong> @Model.Car.Year</li>
+    <li><strong>Дата замовлення:</strong> @Model.OrderDate.ToString("dd.MM.yyyy HH:mm")</li>
+</ul>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <button type="submit" class="btn btn-danger">Так, видалити</button>
+    <a asp-action="Index" class="btn btn-secondary">Скасувати</a>
+</form>

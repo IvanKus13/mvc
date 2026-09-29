@@ -1,0 +1,54 @@
+﻿@model WebApplication1.Models.Car
+
+<h2>Додати автомобіль</h2>
+
+<!-- Відображення всіх помилок моделі (якщо вони є) -->
+<div asp-validation-summary="All" class="text-danger"></div>
+
+<form asp-action="Create" method="post" enctype="multipart/form-data">
+
+    <!-- Марка автомобіля -->
+    <div class="mb-3">
+        <label asp-for="Brand" class="form-label"></label>
+        <input asp-for="Brand" class="form-control" />
+        <span asp-validation-for="Brand" class="text-danger"></span> <!-- Помилка -->
+    </div>
+
+    <!-- Модель автомобіля -->
+    <div class="mb-3">
+        <label asp-for="Model" class="form-label"></label>
+        <input asp-for="Model" class="form-control" />
+        <span asp-validation-for="Model" class="text-danger"></span> <!-- Помилка -->
+    </div>
+
+    <!-- Рік -->
+    <div class="mb-3">
+        <label asp-for="Year" class="form-label"></label>
+        <input asp-for="Year" class="form-control" />
+        <span asp-validation-for="Year" class="text-danger"></span> <!-- Помилка -->
+    </div>
+
+    <!-- Фото -->
+    <div class="mb-3">
+        <label class="form-label">Фото:</label>
+        <input type="file" name="files" multiple class="form-control" />
+    </div>
+   <!-- Ціна -->
+    <div class="form-group">
+    <label>Ціна</label>
+    <input asp-for="Price" class="form-control" />
+    <span asp-validation-for="Price" class="text-danger"></span>
+</div>
+ <!-- Додаткова інфа -->
+<div class="form-group">
+    <label>Деталі авто</label>
+    <textarea asp-for="Description" class="form-control"></textarea>
+    <span asp-validation-for="Description" class="text-danger"></span>
+</div>
+    <button type="submit" class="btn btn-primary">Зберегти</button>
+</form>
+
+<!-- Підключення валідації
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
